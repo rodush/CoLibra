@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/header" android:layout_marginTop="5dp" android:layout_centerHorizontal="true">
+        <TextView android:layout_width="wrap_content" android:id="@+id/textView3" android:layout_height="wrap_content" android:text="@string/welcome"></TextView>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:weightSum="1" android:layout_centerInParent="true" android:layout_height="wrap_content" android:layout_marginRight="10pt" android:layout_margin="10pt" android:id="@+id/linearLayout11" android:padding="10dp">
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="wrap_content">
+    	    <RadioGroup android:id="@+id/radioGroup1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="horizontal">
+    	        <RadioButton android:id="@+id/radio0" android:layout_height="wrap_content" android:text="New Reader" android:layout_width="wrap_content" android:checked="true" android:onClick="" android:clickable="true"></RadioButton>
+    	        <RadioButton android:id="@+id/radio1" android:layout_height="wrap_content" android:text="Sign In" android:layout_width="wrap_content" android:checked="true"></RadioButton>
+    	    </RadioGroup>
+    	</LinearLayout>
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout5" android:orientation="vertical">
+            <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout6">
+                <TextView android:id="@+id/textView2" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/label_email" android:layout_width="89dp" android:layout_weight="0.05"></TextView>
+                <EditText android:id="@+id/editText2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="textEmailAddress" android:layout_weight="0.99"></EditText>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout7">
+            <LinearLayout android:layout_height="match_parent" android:layout_width="wrap_content" android:id="@+id/linearLayout8" android:layout_weight="0.14" android:weightSum="1">
+                <TextView android:id="@+id/textView4" android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/label_password" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+                <EditText android:id="@+id/editText3" android:layout_height="wrap_content" android:inputType="textPassword" android:layout_width="match_parent"></EditText>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:visibility="gone" android:id="@+id/signup_extra_details">
+            <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:id="@+id/linearLayout9">
+                <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout10">
+                    <TextView android:layout_weight="0.15" android:layout_width="wrap_content" android:id="@+id/TextView1" android:layout_height="wrap_content" android:text="@string/label_repeat_password" android:textAppearance="?android:attr/textAppearanceSmall"></TextView>
+                    <EditText android:layout_weight="1" android:id="@+id/editText4" android:layout_width="wrap_content" android:inputType="textPassword" android:layout_height="wrap_content"></EditText>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:weightSum="1" android:id="@+id/linearLayout3">
+                <LinearLayout android:layout_weight="2.28" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout4">
+                    <TextView android:layout_weight="0.25" android:layout_width="100dp" android:id="@+id/textView1" android:layout_height="wrap_content" android:text="@string/lable_full_name" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+                    <EditText android:layout_weight="0.87" android:id="@+id/editText1" android:layout_width="wrap_content" android:inputType="textPersonName" android:layout_height="wrap_content"></EditText>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent" android:orientation="vertical" android:gravity="center">
+            <Button android:id="@+id/button1" android:text="@string/label_btn_submit" android:layout_height="wrap_content" android:layout_width="91dp" android:capitalize="words"></Button>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

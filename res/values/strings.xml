@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, ColibraActivity!</string>
-    <string name="app_name">Colibra</string>
+    <string name="hello">Alloha @person!</string>
+    <string name="app_name">CoLibra</string>
+    <string name="label_email">E-mail</string>
+    <string name="lable_full_name">Full Name</string>
+    <string name="welcome">Welcome!</string>
+    <string name="label_password">Password</string>
+    <string name="label_repeat_password">Repeat password</string>
+    <string name="label_btn_submit">Sign In</string>
 </resources>

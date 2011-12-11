@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="books">
+        <item>Android Development</item>
+        <item>JAVA for Professionals</item>
+        <item>Linux format</item>
+        <item>PHP Inside</item>
+        <item>Power programming</item>
+    </string-array>
+    
+</resources>
