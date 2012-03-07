@@ -1,18 +1,14 @@
 package com.cogniance.rodush;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,6 +41,7 @@ public class ColibraSigninActivity extends Activity {
         rb_sign_in.setOnClickListener(sign_in_click);
         
         submit_btn.setOnClickListener(submit_click);
+        
     };
     
     public OnClickListener new_user_click = new View.OnClickListener() {
@@ -80,7 +77,7 @@ public class ColibraSigninActivity extends Activity {
 			final TextView repeat_pass = (TextView)findViewById(R.id.editText4);
 			final TextView full_name = (TextView)findViewById(R.id.editText1);
 			
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(mode == "new" ? 4 : 2);
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 	        nameValuePairs.add(new BasicNameValuePair("username", username.toString()));
 	        nameValuePairs.add(new BasicNameValuePair("password", password.toString()));
 	        if (mode == "new") {
@@ -99,15 +96,18 @@ public class ColibraSigninActivity extends Activity {
 	        toast.setGravity(Gravity.CENTER, 0, 0);
 	        toast.show();
 	        
-			
-//			try
-//			{
-//				InputStream iStream = response.getEntity().getContent(); 
-//			}			
-//			catch(IOException ioe)
-//			{
-				// TODO: Log exception message 
-//			}
+	        /*
+	        final SharedPreferences prefs = context.getSharedPreferences();
+	        Editor editor = prefs.edit();
+	        editor.putString("field_name", data);
+	        editor.commit();
+	        data = prefs.getString("field_name");
+         	*/
+
+	        
+	        Intent intent = new Intent();
+	        intent.setClass(getApplicationContext(), ColibraListActivity.class);
+	        startActivity(intent);
 		}
 	};
 	

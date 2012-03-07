@@ -13,73 +13,98 @@ import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import android.util.Log;
 
 import com.google.gson.Gson;
 
-
 public class ColibraHttpRequest {
-	
-	private static final String SERVICE_URL = "http://10.0.2.2/";
+
+	private static final String SERVICE_URL = "http://10.0.2.2/phpmyadmin/";
 	private static final String TAG = "HTTPClient";
-	
-    // Create a new HttpClient and Post Header
-    HttpClient httpclient = new DefaultHttpClient();
-    HttpResponse response;
+
+	// Create a new HttpClient and Post Header
+	HttpClient httpclient = new DefaultHttpClient();
+	HttpResponse response;
 	private String responseString = null;
-    
-	public String postData(String actionName, NameValuePair... nameValuePairs) {
 
-	    HttpPost httppost = new HttpPost(SERVICE_URL);
-//		HttpGet httpget = new HttpGet(SERVICE_URL);
-	    
-	    try {
-	        // Add your data
-	        httppost.setEntity(new UrlEncodedFormEntity(Arrays.asList(nameValuePairs)));
+	// Create a local instance of cookie store
+	CookieStore cookieStore = new BasicCookieStore();
 
-	        // Execute HTTP Post Request
-	        response = httpclient.execute(httppost);
-	        
-	        // process a Response
-	        responseString  = processResponse(response);
-	        
-	    } catch (ClientProtocolException e) {
-	        // TODO Auto-generated catch block
-	    	Log.e(TAG, e.toString());
-	    	
-	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
-	    	Log.e(TAG, e.toString());
-	    }
-	    
-	    return responseString;
+	// Create local HTTP context
+	HttpContext localContext = new BasicHttpContext();
+
+	public String postData(String actionName, List<NameValuePair> nameValuePairs) {
+
+		HttpPost httppost = new HttpPost(SERVICE_URL);
+		// HttpGet httpget = new HttpGet(SERVICE_URL);
+
+		try {
+			// Bind custom cookie store to the local context
+			localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+
+			// Add your data
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+			// Execute HTTP Post Request
+			response = httpclient.execute(httppost, localContext);
+
+			// process a Response
+			responseString = processResponse(response);
+
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, e.toString());
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, e.toString());
+		}
+//			finally {
+//			// When HttpClient instance is no longer needed,
+//			// shut down the connection manager to ensure
+//			// immediate deallocation of all system resources
+//			httpclient.getConnectionManager().shutdown();
+//		}
+
+		return responseString;
 	}
-	
+
 	protected String processResponse(HttpResponse response) throws IOException {
+
+		StatusLine statusLine = response.getStatusLine();
 		
- 		StatusLine statusLine = response.getStatusLine();
-        
-        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            response.getEntity().writeTo(out);
-            out.close();
-            responseString = out.toString();
-        } else{
-            //Closes the connection.
-            response.getEntity().getContent().close();
-            throw new IOException(statusLine.getReasonPhrase());
+		List<Cookie> cookies = cookieStore.getCookies();
+        for (int i = 0; i < cookies.size(); i++) {
+        	Log.d(TAG, cookies.get(i).toString());
         }
-		
+
+		if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			response.getEntity().writeTo(out);
+			out.close();
+			responseString = out.toString();
+		} else {
+			// Closes the connection.
+			response.getEntity().getContent().close();
+			throw new IOException(statusLine.getReasonPhrase());
+		}
+
 		Gson gson = new Gson();
-		Object oResponse = gson.fromJson(responseString, null);
-		
+		// Object oResponse = gson.fromJson(responseString, null);
+
 		return responseString;
 	}
 
