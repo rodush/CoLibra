@@ -19,105 +19,90 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cogniance.rodush.httpclient.ColibraHttpRequest;
+import com.googlecode.androidannotations.annotations.Click;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.ViewById;
 
+@EActivity(R.layout.signin)
 public class ColibraSigninActivity extends Activity {
 	
 	protected ColibraHttpRequest request = new ColibraHttpRequest();
 	protected String responseString;
 	
+	@ViewById(R.id.radio0)
+	RadioButton rb_new_user;
+	
+	@ViewById(R.id.radio1)
+	RadioButton rb_sign_in;
+	
+	@ViewById(R.id.button1)
+	Button submit_btn;
+	
+	@ViewById(R.id.signup_extra_details)
+	LinearLayout extra_box;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signin);
-        
-        final RadioButton rb_new_user = (RadioButton) findViewById(R.id.radio0);
-        final RadioButton rb_sign_in = (RadioButton) findViewById(R.id.radio1);
-        final Button submit_btn = (Button) findViewById(R.id.button1);
-        
-        // when user clicks on new - show extra fields to him
-        rb_new_user.setOnClickListener(new_user_click);
-        
-        rb_sign_in.setOnClickListener(sign_in_click);
-        
-        submit_btn.setOnClickListener(submit_click);
-        
+        super.onCreate(savedInstanceState);        
     };
     
-    public OnClickListener new_user_click = new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			// show extra details box
-			final LinearLayout extra_box = (LinearLayout) findViewById(R.id.signup_extra_details);
-			extra_box.setVisibility(View.VISIBLE);
-		}
-	};
+    @Click
+    void radio0() {
+    	// show extra details box
+    	extra_box.setVisibility(View.VISIBLE);
+    }
     
-    public OnClickListener sign_in_click = new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			// show extra details box
-			final LinearLayout extra_box = (LinearLayout) findViewById(R.id.signup_extra_details);
-			extra_box.setVisibility(View.INVISIBLE);
-		}
-	};	
-	
-	public OnClickListener submit_click = new View.OnClickListener() {
+    @Click
+    void radio1() {
+    	extra_box.setVisibility(View.INVISIBLE);
+    }
+    
+    @Click
+    void button1() {
+    	// Get all data posted by user
+		// we do not need to check another button because it's a RadioButon control
+		final String mode = rb_new_user.isSelected() ? "new" : "old";
 		
-		@Override
-		public void onClick(View v) {
-			
-			final RadioButton rb_new_user = (RadioButton) findViewById(R.id.radio0);
-			// Get all data posted by user
-			// we do not need to check another button because it's a RadioButon control
-			final String mode = rb_new_user.isSelected() ? "new" : "old";
-			
-			final TextView username = (TextView)findViewById(R.id.editText2);
-			final TextView password = (TextView)findViewById(R.id.editText3);
-			final TextView repeat_pass = (TextView)findViewById(R.id.editText4);
-			final TextView full_name = (TextView)findViewById(R.id.editText1);
-			
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-	        nameValuePairs.add(new BasicNameValuePair("username", username.toString()));
-	        nameValuePairs.add(new BasicNameValuePair("password", password.toString()));
-	        if (mode == "new") {
-	        	nameValuePairs.add(new BasicNameValuePair("repeat_pass", repeat_pass.toString()));
-		        nameValuePairs.add(new BasicNameValuePair("full_name", full_name.toString()));
-	        }
-			
-	        responseString = request.postData("signin", nameValuePairs);
-			
-	        
-	        Toast toast = Toast.makeText(
-	        		getApplicationContext(),
-	        		responseString,
-	        		Toast.LENGTH_SHORT
-	        );
-	        toast.setGravity(Gravity.CENTER, 0, 0);
-	        toast.show();
-	        
-	        /*
-	        final SharedPreferences prefs = context.getSharedPreferences();
-	        Editor editor = prefs.edit();
-	        editor.putString("field_name", data);
-	        editor.commit();
-	        data = prefs.getString("field_name");
-         	*/
+		final TextView username = (TextView)findViewById(R.id.editText2);
+		final TextView password = (TextView)findViewById(R.id.editText3);
+		final TextView repeat_pass = (TextView)findViewById(R.id.editText4);
+		final TextView full_name = (TextView)findViewById(R.id.editText1);
+		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("username", username.toString()));
+        nameValuePairs.add(new BasicNameValuePair("password", password.toString()));
+        if (mode == "new") {
+        	nameValuePairs.add(new BasicNameValuePair("repeat_pass", repeat_pass.toString()));
+	        nameValuePairs.add(new BasicNameValuePair("full_name", full_name.toString()));
+        }
+		
+        responseString = request.postData("signin", nameValuePairs);
+		
+        
+        Toast toast = Toast.makeText(
+        		getApplicationContext(),
+        		responseString,
+        		Toast.LENGTH_SHORT
+        );
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+        
+        /*
+        final SharedPreferences prefs = context.getSharedPreferences();
+        Editor editor = prefs.edit();
+        editor.putString("field_name", data);
+        editor.commit();
+        data = prefs.getString("field_name");
+     	*/
 
-	        
-	        Intent intent = new Intent();
-	        intent.setClass(getApplicationContext(), ColibraListActivity.class);
-	        startActivity(intent);
-		}
-	};
-	
-	
-	
-	
-	
-	
-	
-	
+        
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), ColibraListActivity.class);
+        startActivity(intent);
+    }
+    
+    
 	/*
 	public OnClickListener submit_click = new View.OnClickListener() {
 		@Override

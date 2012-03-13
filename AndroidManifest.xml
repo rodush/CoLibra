@@ -16,7 +16,7 @@
         
         <activity
             android:label="@string/app_name"
-            android:name=".ColibraSigninActivity" >
+            android:name=".ColibraSigninActivity_" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
