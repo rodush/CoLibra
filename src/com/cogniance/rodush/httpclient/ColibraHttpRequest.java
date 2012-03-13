@@ -28,6 +28,7 @@ import org.apache.http.protocol.HttpContext;
 
 import android.util.Log;
 
+import com.cogniance.rodush.library.Book;
 import com.google.gson.Gson;
 
 public class ColibraHttpRequest {
@@ -103,7 +104,7 @@ public class ColibraHttpRequest {
 		}
 
 		Gson gson = new Gson();
-		// Object oResponse = gson.fromJson(responseString, null);
+//		Book books = gson.fromJson(responseString, Book.class);
 
 		return responseString;
 	}
