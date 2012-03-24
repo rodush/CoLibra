@@ -8,38 +8,38 @@
         android:id="@+id/book_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title of the book"
+        android:text="@string/book_title_label"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Author name"
+        android:text="@string/author_name_label"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
     <TextView
         android:id="@+id/book_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Author name"
+        android:text="@string/publish_year_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/technology"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Technology"
+        android:text="@string/technology_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/book_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/sym_def_app_icon" />
 
     <RatingBar
-        android:id="@+id/ratingBar1"
+        android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -47,6 +47,6 @@
         android:id="@+id/reserve_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reserve" />
+        android:text="@string/reserve" />
 
 </LinearLayout>

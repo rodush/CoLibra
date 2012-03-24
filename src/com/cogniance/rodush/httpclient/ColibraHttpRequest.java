@@ -28,12 +28,13 @@ import org.apache.http.protocol.HttpContext;
 
 import android.util.Log;
 
+import com.cogniance.rodush.library.Author;
 import com.cogniance.rodush.library.Book;
 import com.google.gson.Gson;
 
 public class ColibraHttpRequest {
 
-	private static final String SERVICE_URL = "http://10.0.2.2/phpmyadmin/";
+	private static final String SERVICE_URL = "http://10.0.2.2/index.html";
 	private static final String TAG = "HTTPClient";
 
 	// Create a new HttpClient and Post Header
@@ -102,8 +103,15 @@ public class ColibraHttpRequest {
 			response.getEntity().getContent().close();
 			throw new IOException(statusLine.getReasonPhrase());
 		}
-
-		Gson gson = new Gson();
+		
+		// FIXME: Remove this hardcoded string
+//		responseString = "{firstName: Roman, lastName: Dushko}";
+//		responseString = "{ name:'Demo book', publish_year:2011, category: 1, currentState: 1, "
+//							+ "author: { firstName: Roman, lastName: Dushko } }";
+//		
+//		Gson gson = new Gson();
+//		Book book = gson.fromJson(responseString, Book.class);
+//		Log.d(TAG, book.getAuthor().getFullName());
 //		Book books = gson.fromJson(responseString, Book.class);
 
 		return responseString;

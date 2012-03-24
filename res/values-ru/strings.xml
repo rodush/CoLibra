@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Приветствую, @person!</string>
+    <string name="app_name">CoLibra</string>
+    <string name="label_email">E-mail</string>
+    <string name="lable_full_name">Полное имя</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="new_reader">Новый читатель</string>
+    <string name="sign_in">Войти</string>
+    <string name="label_password">Пароль</string>
+    <string name="label_repeat_password">Повтор пароля</string>
+    <string name="label_btn_submit">Войти</string>
+    <string name="book_title_label">Название книги</string>
+    <string name="author_name_label">Автор</string>
+    <string name="publish_year_label">Год издания</string>
+    <string name="technology_label">Технология</string>
+    <string name="reserve">Зарезервировать</string>
+</resources>

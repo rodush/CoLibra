@@ -5,7 +5,14 @@
     <string name="label_email">E-mail</string>
     <string name="lable_full_name">Full Name</string>
     <string name="welcome">Welcome!</string>
+    <string name="new_reader">New reader</string>
+    <string name="sign_in">Sign in</string>
     <string name="label_password">Password</string>
     <string name="label_repeat_password">Repeat password</string>
     <string name="label_btn_submit">Sign In</string>
+    <string name="book_title_label">Title of the book</string>
+    <string name="author_name_label">Author name</string>
+    <string name="publish_year_label">Published in</string>
+    <string name="technology_label">Technology</string>
+    <string name="reserve">Reserve</string>
 </resources>

@@ -88,7 +88,7 @@ public class ColibraDbHelper extends SQLiteOpenHelper implements BaseColumns {
 			+ BOOK_ID + " integer not null)";
 
 	private static final String CREATE_BOOKS_RATE_TABLE_SQL = "CREATE TABLE "
-			+ TABLE_BOOK_RATE + " (" + RATE_BOOK_ID + "integer not null, "
+			+ TABLE_BOOK_RATE + " (" + RATE_BOOK_ID + " integer not null, "
 			+ RATE_VAL + " float not null)";
 
 	

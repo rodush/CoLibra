@@ -74,7 +74,7 @@ public class ColibraListActivity extends ListActivity {
 		// Start 'Show book details' activity and pass id of selected book to it
 		Intent intent = new Intent();
 		intent.setClass(this.getApplicationContext(),
-				ColibraBookDetailsActivity.class);
+				ColibraBookDetailsActivity_.class);
 		intent.putExtra("book_id", myCursor.getInt(0));
 		intent.putExtra("book_name", myCursor.getString(1));
 		intent.putExtra("book_year", myCursor.getInt(2));
