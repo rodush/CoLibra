@@ -96,7 +96,6 @@ public class ColibraListActivity extends ListActivity {
 		myPrefs.viewMode().get();
 		// TODO: Trigger preferences dialog show-up
 //		myPrefs.viewMode().put();
-		addP(R.xml.view_mode_prefs)
 	}
 	
 	@OptionsItem(R.id.menu_item_cabinet)
