@@ -8,3 +8,8 @@ The first _*Alpha*_ version of the application supposed to be released to the en
 unfortunately because of lack of time the development very slow and still not finished...
 
 Moreover, seems that the future development will be frozen for an undefined period of time....
+
+TODO:
+Use: http://static.springsource.org/spring-android/docs/1.0.x/reference/htmlsingle/#rest-template
+Spring REST module for Android, instead of using HttpClient, GSON as separated libs.
+https://github.com/excilys/androidannotations/wiki/Rest%20API

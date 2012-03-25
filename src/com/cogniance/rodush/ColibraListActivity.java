@@ -2,6 +2,10 @@ package com.cogniance.rodush;
 
 import com.cogniance.rodush.colibra.data.ColibraDbAdapter;
 import com.cogniance.rodush.colibra.data.ColibraDbHelper;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.OptionsItem;
+import com.googlecode.androidannotations.annotations.OptionsMenu;
+import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -9,24 +13,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 //import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 //import android.widget.Toast;
-
+@EActivity
+@OptionsMenu(R.menu.book_list)
 public class ColibraListActivity extends ListActivity {
+	
+	@Pref
+	ColibraPreferences_ myPrefs;
 
 	protected ListView books_list;
 	long itmId = -1;
-
-	public static final int MENU_CABINET = 101;
-	public static final int MENU_EXIT = 102;
 
 	private Cursor myCursor;
 	private ListAdapter myListAdapter;
@@ -43,11 +46,10 @@ public class ColibraListActivity extends ListActivity {
 		// if (!userIsAuthenticated) {
 		// @TODO: Forward to signing Activity
 		// }
-
-		// Prepare data for the list from the resources array
-		// 1. Get last added books / most read books
-		// this.setListAdapter(new ArrayAdapter<String>(this, R.layout.list,
-		// R.id.book_name, getResources().getStringArray(R.array.books)));
+		
+		// Get view mode from the preferences
+		// whether it grid or list:
+		
 
 		myCursor = managedQuery(ColibraDbAdapter.BOOKS_URI, myBookContent,
 				null, null, ColibraDbHelper.BOOK_NAME); // order by book name
@@ -58,6 +60,13 @@ public class ColibraListActivity extends ListActivity {
 						ColibraDbHelper.BOOK_TECHNOLOGY_ID }, new int[] {
 						R.id.book_name, R.id.book_year, R.id.book_technology });
 		this.setListAdapter(myListAdapter);
+		
+		
+	}
+	
+	public void onResume(){
+		super.onResume();
+		// Set view mode
 	}
 	
 	public void onListItemClick(ListView lv, View v, int position, long id) {
@@ -81,38 +90,32 @@ public class ColibraListActivity extends ListActivity {
 		intent.putExtra("book_technology", myCursor.getInt(3));
 		startActivity(intent);
 	}
-
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, MENU_CABINET, Menu.NONE, "Cabinet")
-				.setAlphabeticShortcut('c');
-		menu.add(Menu.NONE, MENU_EXIT, Menu.NONE, "Exit");
-
-		return (super.onCreateOptionsMenu(menu));
+	
+	@OptionsItem(R.id.menu_item_view_mode)
+	void viewModeClicked(){
+		myPrefs.viewMode().get();
+		// TODO: Trigger preferences dialog show-up
+//		myPrefs.viewMode().put();
+		addP(R.xml.view_mode_prefs)
 	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case MENU_CABINET:
-			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(),
-					ColibraCabinetActivity.class);
-			startActivity(intent);
-			break;
-		case MENU_EXIT:
-			AlertDialog.Builder dialogBuider = new AlertDialog.Builder(this);
-			dialogBuider.setTitle("Exit");
-			dialogBuider.setMessage("Are you sure?");
-			dialogBuider.setCancelable(false); // do not allow to close with
-												// 'Back' button
-			dialogBuider.setPositiveButton("Yes", this.onExitConfirmListener);
-			dialogBuider.setNegativeButton("No", this.onExitCancelListener);
-			dialogBuider.show();
-			break;
-		default:
-			return false;
-		}
-
-		return true;
+	
+	@OptionsItem(R.id.menu_item_cabinet)
+	void cabinetClicked(){
+		Intent intent = new Intent();
+		intent.setClass(this, ColibraCabinetActivity.class);
+		startActivity(intent);
+	}
+	
+	@OptionsItem(R.id.menu_item_exit)
+	void exitClicked(){
+		AlertDialog.Builder dialogBuider = new AlertDialog.Builder(this);
+		dialogBuider.setTitle("Exit");
+		dialogBuider.setMessage("Are you sure?");
+		dialogBuider.setCancelable(false); // do not allow to close with
+											// 'Back' button
+		dialogBuider.setPositiveButton("Yes", this.onExitConfirmListener);
+		dialogBuider.setNegativeButton("No", this.onExitCancelListener);
+		dialogBuider.show();
 	}
 
 	protected DialogInterface.OnClickListener onExitConfirmListener = new DialogInterface.OnClickListener() {

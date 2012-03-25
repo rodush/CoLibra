@@ -2,9 +2,9 @@ package com.cogniance.rodush;
 
 import com.cogniance.rodush.colibra.data.ColibraDbAdapter;
 import com.cogniance.rodush.colibra.data.ColibraDbHelper;
+import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
@@ -78,7 +78,6 @@ public class ColibraBookDetailsActivity extends Activity implements OnRatingBarC
 //				null,
 //				null
 //		   );
-		updateUI();
 	}
 
 	@Click(R.id.reserve_btn)
@@ -103,7 +102,7 @@ public class ColibraBookDetailsActivity extends Activity implements OnRatingBarC
 		 Toast.LENGTH_SHORT).show();
 	}
 	
-	@UiThread
+	@AfterViews
 	void updateUI(){
 		book_name.setText(myCursor.getString(1));
 		book_year.setText(myCursor.getString(2));

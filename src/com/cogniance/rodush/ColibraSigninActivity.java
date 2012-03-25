@@ -97,7 +97,7 @@ public class ColibraSigninActivity extends Activity {
 
         
         Intent intent = new Intent();
-        intent.setClass(getApplicationContext(), ColibraListActivity.class);
+        intent.setClass(getApplicationContext(), ColibraListActivity_.class);
         startActivity(intent);
     }
     

@@ -15,4 +15,7 @@
     <string name="publish_year_label">Published in</string>
     <string name="technology_label">Technology</string>
     <string name="reserve">Reserve</string>
+    <string name="menu_label_view_mode">View mode</string>
+    <string name="menu_label_exit">Exit</string>
+    <string name="menu_label_to_cabinet">My cabinet</string>
 </resources>

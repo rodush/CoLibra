@@ -8,4 +8,9 @@
         <item>Power programming</item>
     </string-array>
     
+    <string-array name="view_modes">
+        <item>List</item>
+        <item>Grid</item>
+    </string-array>
+    
 </resources>
