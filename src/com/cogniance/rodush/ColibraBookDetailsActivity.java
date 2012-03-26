@@ -5,11 +5,16 @@ import com.cogniance.rodush.colibra.data.ColibraDbHelper;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.OptionsItem;
+import com.googlecode.androidannotations.annotations.OptionsMenu;
 import com.googlecode.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -23,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @EActivity(R.layout.book_details)
+@OptionsMenu(R.menu.book_details)
 public class ColibraBookDetailsActivity extends Activity implements OnRatingBarChangeListener {
 
 	protected int book_id;
@@ -62,22 +68,24 @@ public class ColibraBookDetailsActivity extends Activity implements OnRatingBarC
 		
 		Bundle extras = this.getIntent().getExtras();
 		book_id = extras.getInt("book_id");
+		
+//		rateCursor = getContentResolver().query(
+//					ColibraDbAdapter.BOOK_RATE_URI,
+//					bookRateMap,
+//					"book_id=" + book_id,
+//					null,
+//					null
+//				);
+//		rateCursor.moveToFirst();
 
 		myCursor = managedQuery(
-						ColibraDbAdapter.BOOKS_URI,
-						bookDetailsMap,
-						"_ID=" + book_id,
-						null,
-						null
-				   );
+					ColibraDbAdapter.BOOKS_URI,
+					bookDetailsMap,
+					"_ID=" + book_id,
+					null,
+					null
+				);
 		myCursor.moveToNext();
-//		rateCursor  = managedQuery(
-//				ColibraDbAdapter.BOOK_RATE_URI,
-//				bookRateMap,
-//				"book_id=" + book_id,
-//				null,
-//				null
-//		   );
 	}
 
 	@Click(R.id.reserve_btn)
@@ -124,7 +132,7 @@ public class ColibraBookDetailsActivity extends Activity implements OnRatingBarC
 			
 			// insert new rate
 			if(false){
-				
+				client.insert(ColibraDbAdapter.BOOK_RATE_URI, values);
 			}
 			// update prev rate
 			else{
@@ -137,6 +145,39 @@ public class ColibraBookDetailsActivity extends Activity implements OnRatingBarC
 			e.printStackTrace();
 		}
 	}
+	
+	@OptionsItem(R.id.menu_item_cabinet)
+	void cabinetClicked(){
+		Intent intent = new Intent();
+		intent.setClass(this, ColibraCabinetActivity.class);
+		startActivity(intent);
+	}
+	
+	@OptionsItem(R.id.menu_item_exit)
+	void exitClicked(){
+		AlertDialog.Builder dialogBuider = new AlertDialog.Builder(this);
+		dialogBuider.setTitle("Exit");
+		dialogBuider.setMessage("Are you sure?");
+		dialogBuider.setCancelable(false); // do not allow to close with
+											// 'Back' button
+		dialogBuider.setPositiveButton("Yes", this.onExitConfirmListener);
+		dialogBuider.setNegativeButton("No", this.onExitCancelListener);
+		dialogBuider.show();
+	}
+
+	protected DialogInterface.OnClickListener onExitConfirmListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int id) {
+			// close current activity
+			ColibraBookDetailsActivity.this.finish();
+		}
+	};
+
+	protected DialogInterface.OnClickListener onExitCancelListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int id) {
+			// close the dialog and return to current activity
+			dialog.cancel();
+		}
+	};
 	
 	
 }
