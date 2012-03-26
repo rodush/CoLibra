@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" > 
+    <ListPreference
+        android:summary="@string/label_books_view_mode"
+        android:entries="@array/view_modes_labels"
+        android:entryValues="@array/view_modes_keys"
+        android:negativeButtonText="Cancel"
+        android:positiveButtonText="OK"
+        android:dialogTitle="@string/title_select_view_mode" />
+</PreferenceScreen>
