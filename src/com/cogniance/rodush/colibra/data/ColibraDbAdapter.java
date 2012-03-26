@@ -14,22 +14,14 @@ public class ColibraDbAdapter extends ContentProvider {
 	/**
 	 * Declare URI constants
 	 */
-	public static final Uri CONTENT_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter");
-	public static final Uri USERS_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter/user");
-	public static final Uri BOOKS_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter/book");
-	public static final Uri AUTHOR_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter/author");
-	public static final Uri BOOK_AUTHOR_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter/book/author");
-	public static final Uri BOOK_RATE_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter/book/rate");
-	public static final Uri USER_BOOK_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter/user/book");
-	public static final Uri TECHNOLOGY_URI = Uri
-			.parse("content://com.cogniance.rodush.colibradbadapter/technology");
+	public static final Uri CONTENT_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter");
+	public static final Uri BOOK_AUTHOR_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter/book/author");
+	public static final Uri BOOK_RATE_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter/book/rate");
+	public static final Uri USER_BOOK_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter/user/book");
+	public static final Uri TECHNOLOGY_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter/technology");
+	public static final Uri USERS_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter/user");
+	public static final Uri BOOKS_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter/book");
+	public static final Uri AUTHOR_URI = Uri.parse("content://com.cogniance.rodush.colibradbadapter/author");
 
 	// DB fields
 	public static final String ROW_ID = "_id";

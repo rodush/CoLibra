@@ -2,9 +2,11 @@ package com.cogniance.rodush;
 
 import com.cogniance.rodush.colibra.data.ColibraDbAdapter;
 import com.cogniance.rodush.colibra.data.ColibraDbHelper;
+import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.OptionsItem;
 import com.googlecode.androidannotations.annotations.OptionsMenu;
+import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 
 import android.app.AlertDialog;
@@ -15,6 +17,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 //import android.widget.ArrayAdapter;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -33,7 +36,10 @@ public class ColibraListActivity extends ListActivity {
 
 	private Cursor myCursor;
 	private ListAdapter myListAdapter;
-
+	
+	@ViewById
+	GridView books_grid_view;	
+	
 	private static final String[] myBookContent = new String[] {
 			ColibraDbHelper._ID, ColibraDbHelper.BOOK_NAME,
 			ColibraDbHelper.BOOK_PUBLISH_YEAR,
@@ -53,15 +59,17 @@ public class ColibraListActivity extends ListActivity {
 
 		myCursor = managedQuery(ColibraDbAdapter.BOOKS_URI, myBookContent,
 				null, null, ColibraDbHelper.BOOK_NAME); // order by book name
-
+		
 		myListAdapter = new SimpleCursorAdapter(this, R.layout.list, myCursor,
-				new String[] { ColibraDbHelper.BOOK_NAME,
-						ColibraDbHelper.BOOK_PUBLISH_YEAR,
-						ColibraDbHelper.BOOK_TECHNOLOGY_ID }, new int[] {
-						R.id.book_name, R.id.book_year, R.id.book_technology });
+				new String[] { ColibraDbHelper.BOOK_NAME, ColibraDbHelper.BOOK_PUBLISH_YEAR, ColibraDbHelper.BOOK_TECHNOLOGY_ID },
+				new int[] { R.id.book_name, R.id.book_year, R.id.book_technology }
+		);
 		this.setListAdapter(myListAdapter);
-		
-		
+	}
+	
+	@AfterViews
+	void updateUI(){
+//		books_grid_view.setAdapter(myListAdapter);
 	}
 	
 	public void onResume(){
@@ -94,8 +102,8 @@ public class ColibraListActivity extends ListActivity {
 	@OptionsItem(R.id.menu_item_view_mode)
 	void viewModeClicked(){
 		myPrefs.viewMode().get();
-		// TODO: Trigger preferences dialog show-up
-//		myPrefs.viewMode().put();
+		Intent intent = new Intent(getApplicationContext(), ColibraPreferencesActivity_.class);
+		startActivity(intent);
 	}
 	
 	@OptionsItem(R.id.menu_item_cabinet)
@@ -130,5 +138,5 @@ public class ColibraListActivity extends ListActivity {
 			dialog.cancel();
 		}
 	};
-
+	
 }
