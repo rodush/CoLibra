@@ -18,4 +18,6 @@
     <string name="menu_label_view_mode">View mode</string>
     <string name="menu_label_exit">Exit</string>
     <string name="menu_label_to_cabinet">My cabinet</string>
+    <string name="label_books_view_mode">Books View mode</string>
+    <string name="title_select_view_mode">Select view mode</string>
 </resources>

@@ -8,7 +8,12 @@
         <item>Power programming</item>
     </string-array>
     
-    <string-array name="view_modes">
+    <string-array name="view_modes_keys">
+        <item>list</item>
+        <item>grid</item>
+    </string-array>
+    
+    <string-array name="view_modes_labels">
         <item>List</item>
         <item>Grid</item>
     </string-array>
